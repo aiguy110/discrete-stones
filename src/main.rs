@@ -116,5 +116,5 @@ fn main() {
     for i in 0..n {
         print!("{:.2}, ", stone_guesses.guesses[i]);
     }
-    println!("");
+    println!();
 }
