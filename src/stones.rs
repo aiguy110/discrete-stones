@@ -1,6 +1,10 @@
-use rand::prelude::*;
+#![allow(dead_code)]
 
-#[derive(Clone, Copy)]
+use rand::prelude::*;
+use serde::Serialize;
+
+#[derive(Clone, Copy,Serialize)]
+#[serde(transparent)]
 pub struct Stone {
     weight: f64
 }
@@ -13,7 +17,7 @@ impl Stone {
             .floor() as u32
     }
 
-    pub fn reveal_weight(stone: &Stone) -> f64 { // Meant to be clunky to discourage use
+    fn reveal_weight(stone: &Stone) -> f64 { // Meant to be clunky to discourage use
         stone.weight
     }
 
@@ -23,8 +27,7 @@ impl Stone {
         .collect()
     }
 
-    #[allow(dead_code)]
-    pub fn gen_stones_sorted(n: usize) -> Vec<Stone> {
+    fn gen_stones_sorted(n: usize) -> Vec<Stone> {
         let mut stones = Stone::gen_stones(n);
         stones.sort_by(|a,b| a.weight.total_cmp(&b.weight));
         stones
